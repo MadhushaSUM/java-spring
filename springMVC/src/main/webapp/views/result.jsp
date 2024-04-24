@@ -10,7 +10,7 @@
 
   <body>
     <div>
-        Result: ${num3}
+        Result: ${alien1}
     </div>
 
 

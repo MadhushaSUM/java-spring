@@ -12,10 +12,12 @@
     <div>
         SUM Studios
     </div>
+    <br>
+    <br>
 
-    <form action="add">
-         Enter number 1 : <input type="text" name="num1"><br>
-         Enter number 2 : <input type="text" name="num2"><br>
+    <form action="addAlien">
+         Enter your id : <input type="text" name="aid"><br><br>
+         Enter your name : <input type="text" name="aname"><br>
          <button type="submit">Add</button>
     </form>
   </body>

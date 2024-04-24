@@ -1,29 +1,34 @@
 package com.sum.springmvc;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import com.sum.springmvc.model.Alien;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "index.jsp";
+        return "index";
     }
 
     @RequestMapping("add")
-    public String add(HttpServletRequest req) {
-        int num1 = Integer.parseInt(req.getParameter("num1"));
-        int num2 = Integer.parseInt(req.getParameter("num2"));
+    public ModelAndView add(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("result");
 
         int num3 = num1 + num2;
+        mv.addObject("num3", num3);
 
-        HttpSession session = req.getSession();
+        return mv;
+    }
 
-        session.setAttribute("num3", num3);
-
-        return "result.jsp";
+    @RequestMapping("addAlien")
+    public String addAlien(@ModelAttribute("alien1") Alien alien) {
+        return "result";
     }
 }
