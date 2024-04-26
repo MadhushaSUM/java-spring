@@ -1,15 +1,23 @@
 package com.sum.springmvc;
 
+import com.sum.springmvc.data.AlienRepo;
 import com.sum.springmvc.model.Alien;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
+
+    @Autowired
+    AlienRepo repo;
 
     @RequestMapping("/")
     public String home() {
@@ -30,5 +38,11 @@ public class HomeController {
     @RequestMapping("addAlien")
     public String addAlien(@ModelAttribute("alien1") Alien alien) {
         return "result";
+    }
+
+    @GetMapping("getAliens")
+    public String getAliens(Model m) {
+        m.addAttribute("result", repo.findAll());
+        return "showAliens";
     }
 }
