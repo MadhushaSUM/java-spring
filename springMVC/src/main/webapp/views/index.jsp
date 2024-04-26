@@ -15,10 +15,27 @@
     <br>
     <br>
 
-    <form action="addAlien">
+    <form action="addAlien" method="POST">
          Enter your id : <input type="text" name="aid"><br><br>
          Enter your name : <input type="text" name="aname"><br>
          <button type="submit">Add</button>
     </form>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <form action="getAlien">
+         Enter alien id : <input type="text" name="aid"><br><br>
+         <button type="submit">Search</button>
+    </form>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <form action="getAlienByName">
+         Enter alien name : <input type="text" name="aname"><br><br>
+         <button type="submit">Search</button>
+    </form>
+
   </body>
 </html>

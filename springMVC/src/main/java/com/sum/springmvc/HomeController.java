@@ -5,10 +5,7 @@ import com.sum.springmvc.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -37,12 +34,25 @@ public class HomeController {
 
     @RequestMapping("addAlien")
     public String addAlien(@ModelAttribute("alien1") Alien alien) {
+        repo.save(alien);
         return "result";
     }
 
     @GetMapping("getAliens")
     public String getAliens(Model m) {
         m.addAttribute("result", repo.findAll());
+        return "showAliens";
+    }
+
+    @GetMapping("getAlien")
+    public String getAlien(@RequestParam int aid, Model m) {
+        m.addAttribute("result", repo.getReferenceById(aid));
+        return "showAliens";
+    }
+
+    @GetMapping("getAlienByName")
+    public String getAlienByName(@RequestParam String aname, Model m) {
+        m.addAttribute("result", repo.find(aname));
         return "showAliens";
     }
 }
