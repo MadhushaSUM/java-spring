@@ -5,6 +5,7 @@ import com.sum.quizAppMonolothic.dao.QuizDao;
 import com.sum.quizAppMonolothic.model.Question;
 import com.sum.quizAppMonolothic.model.QuestionWrapper;
 import com.sum.quizAppMonolothic.model.Quiz;
+import com.sum.quizAppMonolothic.model.UserAnswers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,27 @@ public class QuizService {
             return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public ResponseEntity<Integer> calculateResult(int id, List<UserAnswers> userAnswers) {
+        Optional<Quiz> quiz = quizDao.findById(id);
+
+        if (quiz.isPresent()) {
+            List<Question> questions = quiz.get().getQuestions();
+
+            int right = 0;
+            int i = 0;
+            for (UserAnswers userAnswer: userAnswers) {
+                if (userAnswer.getUserAnswer().equals(questions.get(i).getRightAnswer())) {
+                    right++;
+                }
+                i++;
+            }
+
+            return new ResponseEntity<>(right, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 }

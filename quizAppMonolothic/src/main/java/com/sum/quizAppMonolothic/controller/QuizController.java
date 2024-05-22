@@ -3,6 +3,7 @@ package com.sum.quizAppMonolothic.controller;
 import com.sum.quizAppMonolothic.model.Question;
 import com.sum.quizAppMonolothic.model.QuestionWrapper;
 import com.sum.quizAppMonolothic.model.Quiz;
+import com.sum.quizAppMonolothic.model.UserAnswers;
 import com.sum.quizAppMonolothic.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class QuizController {
     @GetMapping("get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable int id) {
         return quizService.getQuizQuestions(id);
+    }
+
+    @PostMapping("submit/{id}")
+    public ResponseEntity<Integer> submitQuiz(@PathVariable int id, @RequestBody List<UserAnswers> userAnswers) {
+        return quizService.calculateResult(id, userAnswers);
     }
 }
