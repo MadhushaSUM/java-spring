@@ -38,7 +38,7 @@ public class QuestionController {
     }
 
     @PostMapping("getQuestions")
-    public ResponseEntity<List<QuestionWrapper>> getQuestionsFromId(@RequestBodyquestion-microservice List<Integer> questionIds) {
+    public ResponseEntity<List<QuestionWrapper>> getQuestionsFromId(@RequestBody List<Integer> questionIds) {
         return questionService.getQuestionsFromIds(questionIds);
     }
 
